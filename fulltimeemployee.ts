@@ -1,5 +1,5 @@
-import { Employee } from "./employee";
-import { IEmployee } from "./iemployee";
+import { Employee } from "./employee.js";
+import { IEmployee } from "./iemployee.js";
 
 export class FullTimeEmployee extends Employee implements IEmployee {
     public salary: number;
@@ -24,6 +24,7 @@ export class FullTimeEmployee extends Employee implements IEmployee {
         this.overtimeHours = overtimeHour;
     }
 
+    // Calculates base salary, bonus, and tiered overtime pay
     private calculateSalary(): number {
         const hourlyRate = this.salary/40;
         let overtimePay = 0
@@ -44,34 +45,38 @@ export class FullTimeEmployee extends Employee implements IEmployee {
     }
 
 
+    // Formats and returns full-time employee information
     public displayInformation(): string {
-        let info : string = "";
-
-        info += "name: " + this.firstName + " " + this.lastName + "\n";
-        info += "age: " + this.age + "\n";
-        info += "address: " + this.address + "\n";
-        info += "rank: " + this.rank + "\n";
-        info += "SSN: " + this.ssn + "\n";
-        info += "base salary: " + this.salary.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) + "\n";
-        info += "overtime hours: " + this.overtimeHours + "\n";
-        info += "bonus: " + this.bonus.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) + "\n";
-        info += "total compensation: " + this.calculateCompensation().toLocaleString('en-US', {style: 'currency', currency: 'USD'}) + "\n";
-
+       
+        let info: string = ""; 
+        
+        info += "Name: " + this.firstName + " " + this.lastName + "\n"; 
+        info += "Age: " + this.age + "\n"; 
+        info += "Address: " + this.address + "\n"; 
+        info += "Rank: " + this.rank + "\n"; 
+        info += "SSN: " + this.ssn + "\n"; 
+        info += "Base salary: " + this.salary.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) + "\n"; 
+        info += "Overtime hours: " + this.overtimeHours + "\n"; 
+        info += "Bonus: " + this.bonus.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) + "\n"; 
+        info += "Total compensation: " + this.calculateCompensation().toLocaleString('en-US', {style: 'currency', currency: 'USD'}) + "\n";
+        
         return info;
     }
 
+    // Implements IEmployee method to return total compensation
     calculateCompensation(): number {
         return this.calculateSalary();
     }
 
-    public saveEmployee(): void {
-        if(this.validateAge() && this.validateRank() && this.validateSSN()) {
-            console.log(this.displayInformation());
-        } else {
-            console.log("Save Failed");
-        }
-    }  
-
-
-
+    // Validates data and outputs employee details or failure message
+    public saveEmployee(): void { 
+        const isAgeValid = this.validateAge(); 
+        const isRankValid = this.validateRank(); 
+        const isSSNValid = this.validateSSN(); 
+        if (isAgeValid && isRankValid && isSSNValid) { 
+            console.log(this.displayInformation()); 
+        } else { 
+            console.log("Save Failed"); 
+        } 
+    }
 }

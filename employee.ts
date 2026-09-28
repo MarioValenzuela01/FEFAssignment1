@@ -16,29 +16,32 @@ export abstract class Employee {
     }
 
     // Methods
-
+    
+    // Validates if the age is 16 or older
     protected validateAge(): boolean {
         if (this.age >= 16){
             return true;
         }
-        console.log(`Error, the age: ${this.age} should be >= 16 `);
+        console.log(`Validation Error: Age must be 16 or older.`);
         return false; 
     }
 
+    // Validates if the rank is between 1 and 5 inclusive
     protected validateRank(): boolean {
         if (this.rank >= 1 && this.rank <=5) {
             return true;
         }
 
-        console.log(`Error, rank ${this.rank} should be bettwen 1 to 5 inclusive` );
+        console.log(`Validation Error: Rank must be between 1 and 5.` );
         return false;
     }
 
+    // Validates if the Social Security Number matches the pattern ###-###-###
     protected validateSSN(): boolean {
-        const ssnRegex = /^\\d{3}-\\d{3}-\\d{3}\\$/; 
+        const ssnRegex = /^\d{3}-\d{3}-\d{3}$/; 
         if (ssnRegex.test(this.ssn)) { 
             return true; 
-        } console.log(`Error, The SSN (${this.ssn}) no pattern ###-###-###.`); 
+        } console.log(`Validation Error: SSN must follow the format ###-###-###.`); 
         return false;
 
     }
